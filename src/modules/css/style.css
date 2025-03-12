@@ -6,109 +6,128 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #e6f7ff; /* Mjuk ljusblå bakgrund */
-  color: #333;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to right, #b3e0ff, #e6f2ff); /* Bakgrundsgradient för ett mer spännande utseende */
+  color: #2e2e2e;
   line-height: 1.6;
   padding: 20px;
 }
 
 h1 {
   text-align: center;
-  margin-top: 20px;
-  color: #1f3b5f; /* Mörkblå för rubriker */
-  font-size: 2.5em;
+  margin-top: 30px;
+  color: #013f63;
+  font-size: 3em;
   font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 h2 {
-  color: #444;
-  font-size: 1.3em;
-  margin-bottom: 10px;
+  color: #4a90e2;
+  font-size: 1.4em;
+  margin-bottom: 20px;
+  font-weight: 500;
   text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 input, textarea, select, button {
-  padding: 12px;
-  font-size: 1.1em;
-  border-radius: 10px;
-  border: 2px solid #ddd;
+  padding: 14px;
+  font-size: 1.2em;
+  border-radius: 15px;
+  border: 2px solid #d1e0e0;
   margin-bottom: 15px;
   width: 100%;
   box-sizing: border-box;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease-in-out;
 }
 
 input:focus, textarea:focus, select:focus, button:focus {
   outline: none;
-  border-color: #007bff; /* Blått fokus för att ge en tydlig visuell effekt */
+  border-color: #0099cc;
 }
 
 button {
-  background-color: #00b894; /* Mjuk mintgrön för knappar */
+  background: linear-gradient(45deg, #48c6ef, #6f86d6);
   color: white;
   border: none;
   cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.3s ease;
+  transition: transform 0.2s ease-in-out;
+  padding: 15px;
 }
 
 button:hover {
-  background-color: #00a27b;
+  transform: scale(1.05);
+  background: linear-gradient(45deg, #6f86d6, #48c6ef);
 }
 
 /* Board Layout */
 .board {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin: 30px auto;
   flex-wrap: wrap;
   gap: 20px;
+  max-width: 1200px; /* Begränsa max bredd för större skärmar */
 }
 
 .column {
   background-color: #ffffff;
-  padding: 20px;
-  border-radius: 12px;
+  padding: 30px;
+  border-radius: 15px;
   width: 32%;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.column:hover {
-  transform: translateY(-5px); /* Lätt uppåtlutande effekt för kolumner */
+.column::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #6f86d6, #48c6ef);
+  bottom: 0;
 }
 
 .column h2 {
   font-size: 1.6em;
   text-align: center;
   margin-bottom: 20px;
-  color: #1f3b5f;
+  color: #013f63;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
 }
 
 .task {
-  background-color: #fafafa;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #f0f4f8;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .task:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-10px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .task h3 {
-  font-size: 1.3em;
+  font-size: 1.4em;
   margin-bottom: 10px;
+  color: #333;
 }
 
 .task p {
   font-size: 1.1em;
+  color: #666;
   margin-bottom: 5px;
 }
 
@@ -116,18 +135,18 @@ button:hover {
 #task-form, #member-form {
   background-color: #ffffff;
   padding: 25px;
-  border-radius: 12px;
-  width: 50%;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  width: 45%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   margin: 30px auto;
 }
 
 #task-form input, #task-form textarea, #task-form select {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
 }
 
 #member-form input, #member-form select {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
 }
 
 /* Member List */
@@ -141,63 +160,96 @@ button:hover {
 }
 
 #member-list li {
-  background-color: #f7f7f7;
-  padding: 12px;
-  border-radius: 10px;
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
   width: 180px;
   text-align: center;
 }
 
 #member-list li:hover {
-  transform: translateY(-5px);
-  background-color: #e1f0f6;
+  transform: translateY(-8px);
+  background-color: #f1f5f9;
 }
 
 /* Filter and Sort Container */
 #filter-sort-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   margin: 30px auto;
   padding: 15px;
   background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  max-width: 900px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
 }
 
 #filter-sort-container > div {
   display: flex;
   flex-direction: column;
-  margin-right: 20px;
+  margin-right: 25px;
 }
 
 #filter-sort-container label {
   font-weight: bold;
   margin-bottom: 5px;
+  color: #4a90e2;
 }
 
 #filter-sort-container select {
   width: 200px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #d1e0e0;
+  background-color: #f7f8fa;
 }
 
 #apply-filters {
-  padding: 12px 20px;
-  background-color: #007bff;
+  padding: 15px 30px;
+  background: linear-gradient(45deg, #48c6ef, #6f86d6);
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: transform 0.2s ease-in-out;
 }
 
 #apply-filters:hover {
-  background-color: #0056b3;
+  transform: scale(1.05);
+  background: linear-gradient(45deg, #6f86d6, #48c6ef);
 }
 
 /* Media Queries */
+@media (max-width: 1024px) {
+  .board {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .column {
+    width: 100%;
+    margin-bottom: 30px; /* Mer avstånd mellan kolumner på mindre skärmar */
+  }
+
+  #task-form, #member-form {
+    width: 90%;
+  }
+
+  #filter-sort-container {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 100%;
+  }
+
+  #filter-sort-container > div {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+}
+
 @media (max-width: 768px) {
   .board {
     flex-direction: column;
@@ -209,5 +261,15 @@ button:hover {
 
   #task-form, #member-form {
     width: 90%;
+  }
+
+  /* Gör så att medlemmar visas i en enda rad på mobiler */
+  #member-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #member-list li {
+    width: 100%;
   }
 }
