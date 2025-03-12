@@ -207,7 +207,7 @@ async function assignTask(taskId: string) {
   assignButton.textContent = "Confirm Assignment";
   assignButton.addEventListener("click", async () => {
     const selectedMemberId = memberSelect.value;
-    if (selectedMemberId) {  // ✅ Kontrollera att vi har ett giltigt ID
+    if (selectedMemberId) {  
       const selectedMember = members.find(member => member.id === selectedMemberId);
       
       if (!selectedMember) {
@@ -218,15 +218,15 @@ async function assignTask(taskId: string) {
       // Kontrollera om medlemmen har rätt roll för uppgiften
       if (!selectedMember.roles.includes(task.category)) {
         alert(`Member ${selectedMember.name} cannot be assigned to this task. This task requires a ${task.category} role.`);
-        return;  // Förhindrar att uppgiften går till "in-progress"
+        return; 
       }
 
       await assignTaskToMember(taskId, selectedMemberId);
       
       // Uppdatera uppgiften till 'in-progress'
-      await updateTaskStatus(taskId, "in-progress"); // Uppdatera statusen till "in-progress"
+      await updateTaskStatus(taskId, "in-progress"); 
       
-      displayTasks(); // Uppdatera Scrum Board
+      displayTasks(); 
     } else {
       console.error("Member ID is missing. Cannot assign task.");
     }

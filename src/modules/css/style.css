@@ -6,34 +6,37 @@
 }
 
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f7f7f7;  /* Ljusare bakgrundsfärg */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #e6f7ff; /* Mjuk ljusblå bakgrund */
   color: #333;
   line-height: 1.6;
+  padding: 20px;
 }
 
 h1 {
   text-align: center;
   margin-top: 20px;
-  color: #333;
-  font-size: 2em; /* Större rubrik för att göra sidan mer inbjudande */
+  color: #1f3b5f; /* Mörkblå för rubriker */
+  font-size: 2.5em;
+  font-weight: bold;
 }
 
 h2 {
-  color: #555;
-  font-size: 1.2em;
+  color: #444;
+  font-size: 1.3em;
   margin-bottom: 10px;
+  text-align: center;
 }
 
 input, textarea, select, button {
-  padding: 10px;
-  font-size: 1em;
-  border-radius: 8px; /* Mer rundade hörn för en modernare känsla */
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
+  padding: 12px;
+  font-size: 1.1em;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+  margin-bottom: 15px;
   width: 100%;
   box-sizing: border-box;
-  transition: border-color 0.3s ease; /* Lägga till övergång för border-färg */
+  transition: all 0.3s ease;
 }
 
 input:focus, textarea:focus, select:focus, button:focus {
@@ -42,76 +45,81 @@ input:focus, textarea:focus, select:focus, button:focus {
 }
 
 button {
-  background-color: #28a745; /* Grön färg för att indikera framgång */
+  background-color: #00b894; /* Mjuk mintgrön för knappar */
   color: white;
   border: none;
   cursor: pointer;
-  font-weight: bold; /* Gör texten på knappar mer framträdande */
-  transition: background-color 0.3s ease; /* Övergång för bakgrundsfärg */
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #218838;
+  background-color: #00a27b;
 }
 
-/* Board layout */
+/* Board Layout */
 .board {
   display: flex;
-  justify-content: space-around;
-  margin: 20px;
-  flex-wrap: wrap;  /* Gör att det kan brytas till nya rader på mindre skärmar */
+  justify-content: space-evenly;
+  margin: 30px auto;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .column {
-  background-color: white;
+  background-color: #ffffff;
   padding: 20px;
-  border-radius: 8px;
-  width: 30%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  width: 32%;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px; /* Ökar avståndet mellan kolumner på mindre skärmar */
+  transition: transform 0.3s ease;
+}
+
+.column:hover {
+  transform: translateY(-5px); /* Lätt uppåtlutande effekt för kolumner */
 }
 
 .column h2 {
-  font-size: 1.5em;
+  font-size: 1.6em;
   text-align: center;
   margin-bottom: 20px;
-  color: #007bff; /* Blå rubrik för kolumner */
+  color: #1f3b5f;
 }
 
 .task {
   background-color: #fafafa;
   padding: 15px;
-  margin-bottom: 15px; /* Mer avstånd mellan uppgifter */
+  margin-bottom: 15px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .task:hover {
-  transform: translateY(-5px);  /* Lätt uppåtlutande effekt vid hover */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Tydligare skugga */
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
 .task h3 {
-  font-size: 1.2em;
+  font-size: 1.3em;
   margin-bottom: 10px;
 }
 
 .task p {
-  font-size: 1em;
+  font-size: 1.1em;
   margin-bottom: 5px;
 }
 
-/* Form styling */
+/* Forms */
 #task-form, #member-form {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 45%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 20px auto;
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  width: 50%;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  margin: 30px auto;
 }
 
 #task-form input, #task-form textarea, #task-form select {
@@ -120,63 +128,50 @@ button:hover {
 
 #member-form input, #member-form select {
   margin-bottom: 15px;
-  
 }
 
+/* Member List */
 #member-list {
-  margin-top: 20px;
+  margin-top: 30px;
   list-style-type: none;
   padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 #member-list li {
-  background-color: #f8f9fa;
+  background-color: #f7f7f7;
   padding: 12px;
-  margin-bottom: 12px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, background-color 0.3s ease;
-  width: 150px;
+  width: 180px;
+  text-align: center;
 }
 
 #member-list li:hover {
-  transform: translateX(5px); /* Lätt förflyttning vid hover */
-  background-color: #e9ecef;  /* Ljusare bakgrund på hover */
+  transform: translateY(-5px);
+  background-color: #e1f0f6;
 }
 
-@media (max-width: 768px) {
-  .board {
-    flex-direction: column;
-  }
-
-  .column {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-
-  #task-form, #member-form {
-    width: 90%;
-  }
-}
-
-
-
+/* Filter and Sort Container */
 #filter-sort-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
-  margin: 20px auto;
-  padding: 10px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  max-width: 800px;
+  margin: 30px auto;
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
 }
 
 #filter-sort-container > div {
   display: flex;
   flex-direction: column;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 #filter-sort-container label {
@@ -185,14 +180,14 @@ button:hover {
 }
 
 #filter-sort-container select {
-  width: 180px;
+  width: 200px;
 }
 
 #apply-filters {
-  padding: 10px 20px;
+  padding: 12px 20px;
   background-color: #007bff;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -202,3 +197,17 @@ button:hover {
   background-color: #0056b3;
 }
 
+/* Media Queries */
+@media (max-width: 768px) {
+  .board {
+    flex-direction: column;
+  }
+
+  .column {
+    width: 100%;
+  }
+
+  #task-form, #member-form {
+    width: 90%;
+  }
+}
