@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scrum Board</title>
+    <link rel="stylesheet" href="/src/modules/css/style.css" />
+    <script type="module" src="src/modules/member.js"></script>
+    <script type="module" src="src/modules/firebase.js"></script>
+    <script type="module" src="src/modules/tasks.js"></script>
+    <script type="module" src="src/modules/function.js"></script>
+  </head>
+  <body>
+    <h1>Scrum Board</h1>
+
+    <div class="board">
+      <div class="column" id="new-tasks">
+        <h2>New Tasks</h2>
+      </div>
+
+      <div class="column" id="in-progress-tasks">
+        <h2>In Progress</h2>
+      </div>
+
+      <div class="column" id="done-tasks">
+        <h2>Done</h2>
+      </div>
+    </div>
+
+    <div id="task-form">
+      <h2>Add a Task</h2>
+      <input id="task-title" type="text" placeholder="Task title" />
+      <textarea id="task-description" placeholder="Task description"></textarea>
+      <select id="task-category">
+        <option value="frontend">Frontend</option>
+        <option value="backend">Backend</option>
+        <option value="ux">UX</option>
+      </select>
+      <button id="addTaskBtn">Add Task</button>
+    </div>
+
+    <div id="member-form">
+      <h2>Add a Team Member</h2>
+      <input id="member-name" type="text" placeholder="Member Name" />
+      <select id="member-role" multiple>
+        <option value="UX">UX Designer</option>
+        <option value="frontend">Frontend Developer</option>
+        <option value="backend">Backend Developer</option>
+      </select>
+      <button id="add-member-btn">Add Member</button>
+    </div>
+
+    <h2>Team Members</h2>
+    <ul id="member-list"></ul>
+
+    <div id="assign-container"></div>
+
+    <div id="filter-sort-container">
+      <div>
+        <label for="filter-member">Filter by Member:</label>
+        <select id="filter-member">
+          <option value="">All Members</option>
+        </select>
+      </div>
+      <div>
+        <label for="filter-category">Filter by Category:</label>
+        <select id="filter-category">
+          <option value="">All Categories</option>
+          <option value="frontend">Frontend</option>
+          <option value="backend">Backend</option>
+          <option value="ux">UX</option>
+        </select>
+      </div>
+      <div>
+        <label for="sort-option">Sort by:</label>
+        <select id="sort-option">
+          <option value="timestamp-desc">Timestamp: Newest to Oldest</option>
+          <option value="timestamp-asc">Timestamp: Oldest to Newest</option>
+          <option value="title-asc">Title: A-Z</option>
+          <option value="title-desc">Title: Z-A</option>
+        </select>
+      </div>
+      <button id="apply-filters">Apply Filters</button>
+    </div>
+  </body>
+</html>

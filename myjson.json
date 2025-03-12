@@ -1,0 +1,66 @@
+{
+  "tasks": {
+    "task1": {
+      "title": "Create a homepage",
+      "description": "Build a simple homepage with HTML and CSS",
+      "category": "frontend",
+      "status": "new",
+      "assigned": null,
+      "timestamp": "2025-03-06T12:00:00Z"
+    },
+    "task2": {
+      "title": "Design a logo",
+      "description": "Create a logo for the project in Figma",
+      "category": "ux",
+      "status": "new",
+      "assigned": null,
+      "timestamp": "2025-03-06T12:10:00Z"
+    },
+    "task3": {
+      "title": "Build API",
+      "description": "Create backend API with Node.js and Express",
+      "category": "backend",
+      "status": "new",
+      "assigned": null,
+      "timestamp": "2025-03-06T12:20:00Z"
+    },
+    "task4": {
+      "title": "Create About page",
+      "description": "Create an About Us page using HTML and CSS",
+      "category": "frontend",
+      "status": "new",
+      "assigned": null,
+      "timestamp": "2025-03-06T12:30:00Z"
+    },
+    "task5": {
+      "title": "Write project description",
+      "description": "Write a brief description of the project",
+      "category": "ux",
+      "status": "new",
+      "assigned": null,
+      "timestamp": "2025-03-06T12:40:00Z"
+    },
+    "task6": {
+      "title": "Setup Database",
+      "description": "Set up a simple database with MongoDB for the backend",
+      "category": "backend",
+      "status": "new",
+      "assigned": null,
+      "timestamp": "2025-03-06T12:50:00Z"
+    }
+  },
+ "members": {
+  "member1": {
+    "name": "Anna",
+    "roles": ["ux"]
+  },
+  "member2": {
+    "name": "Johan",
+    "roles": ["backend"]
+  },
+  "member3": {
+    "name": "Sara",
+    "roles": ["frontend"]
+  }
+ }
+}
