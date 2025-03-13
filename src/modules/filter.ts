@@ -81,7 +81,7 @@ document.getElementById("apply-filters")?.addEventListener("click", async () => 
   
     members.forEach(member => {
       const option = document.createElement('option');
-      option.value = member.name ?? '';
+      option.value = member.name;
       option.textContent = `${member.name} - ${member.roles.join(", ")}`;
       memberSelect.appendChild(option);
     });

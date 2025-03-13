@@ -49,9 +49,8 @@ export async function showMemberfilter() {
     defaultOption.textContent = 'Select Member';
     memberSelect.appendChild(defaultOption);
     members.forEach(member => {
-        var _a;
         const option = document.createElement('option');
-        option.value = (_a = member.name) !== null && _a !== void 0 ? _a : '';
+        option.value = member.name;
         option.textContent = `${member.name} - ${member.roles.join(", ")}`;
         memberSelect.appendChild(option);
     });
