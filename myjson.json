@@ -51,15 +51,15 @@
   },
  "members": {
   "member1": {
-    "name": "Anna",
+    "name": "Khabib",
     "roles": ["ux"]
   },
   "member2": {
-    "name": "Johan",
+    "name": "Dana White",
     "roles": ["backend"]
   },
   "member3": {
-    "name": "Sara",
+    "name": "Joe Rogan",
     "roles": ["frontend"]
   }
  }

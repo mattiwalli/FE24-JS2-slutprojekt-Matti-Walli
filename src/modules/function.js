@@ -2,9 +2,9 @@ var _a;
 import { loadTasks, updateTaskStatus, deleteTask, assignTaskToMember, addTask } from "./tasks.js";
 import { loadMembers, addMember, displayMembers } from "./member.js";
 import { filterAndSortTasks } from "./filter.js";
-// När sidan laddas, hämta och visa data
+//---------------------------------------//
 document.addEventListener("DOMContentLoaded", async () => {
-    displayTasks(); // Visa uppgifter vid sidladdning
+    displayTasks();
     const addMemberButton = document.getElementById("add-member-btn");
     if (addMemberButton) {
         addMemberButton.addEventListener("click", async () => {
@@ -16,11 +16,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 alert("Please enter a name and select at least one role.");
                 return;
             }
-            // Lägg till medlemmen i Firebase och invänta resultatet
             await addMember({ name, roles: selectedRoles });
-            // Uppdatera medlemmarna på sidan
             displayMembers();
-            // Töm fälten efter att medlemmen har lagts till
             nameInput.value = "";
             roleSelect.selectedIndex = -1;
         });
@@ -29,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Add Member button not found!");
     }
 });
-// Lägg till en uppgift via formuläret
+//----------------------------------------//
 (_a = document.getElementById("addTaskBtn")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", async () => {
     const titleInput = document.getElementById("task-title");
     const descriptionInput = document.getElementById("task-description");
@@ -55,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     descriptionInput.value = "";
     categorySelect.selectedIndex = 0;
 });
-// Visa uppgifter i Scrum Board
+//----------------------------------------//
 export async function displayTasks(filteredTasksFromDb) {
     var _a;
     const tasks = filteredTasksFromDb || await loadTasks();
@@ -65,20 +62,16 @@ export async function displayTasks(filteredTasksFromDb) {
     const filterMember = filterMemberSelect ? filterMemberSelect.value : "";
     const filterCategory = filterCategorySelect ? filterCategorySelect.value : "";
     const sortOption = sortOptionSelect ? sortOptionSelect.value : "timestamp-desc";
-    // Filtrera och sortera uppgifterna
     const tasksToDisplay = await filterAndSortTasks(tasks, filterMember, filterCategory, sortOption);
-    // Om inga uppgifter finns efter filtrering, visa ett meddelande
     if (tasksToDisplay.length === 0) {
         const message = document.createElement("p");
         message.textContent = "No tasks available for the selected filters.";
         (_a = document.getElementById("tasks-container")) === null || _a === void 0 ? void 0 : _a.appendChild(message);
     }
     else {
-        // Annars fortsätter vi med att visa uppgifterna i kolumnerna
         const newTasksColumn = document.getElementById("new-tasks");
         const inProgressColumn = document.getElementById("in-progress-tasks");
         const doneColumn = document.getElementById("done-tasks");
-        // Rensa kolumnerna innan vi lägger till nya uppgifter
         newTasksColumn.innerHTML = "<h2>New Tasks</h2>";
         inProgressColumn.innerHTML = "<h2>In Progress</h2>";
         doneColumn.innerHTML = "<h2>Done</h2>";
@@ -148,26 +141,22 @@ export async function displayTasks(filteredTasksFromDb) {
         });
     }
 }
-// Tilldela en uppgift till en medlem
+//----------------------------------------//
 async function assignTask(taskId) {
-    console.log("Assign button clicked! Task ID:", taskId); // 🔥 Testutskrift
-    const members = await loadMembers(); // Hämta alla medlemmar från Firebase
-    console.log("Loaded members:", members); // 🔥 Testutskrift
+    const members = await loadMembers();
     if (members.length === 0) {
         alert("No members available to assign.");
         return;
     }
-    // Hämta uppgiften för att kolla vilken kategori den tillhör
     const tasks = await loadTasks();
     const task = tasks.find(t => t.id === taskId);
     if (!task) {
         console.error("Task not found.");
         return;
     }
-    // Skapa en dropdown för att välja medlem
     const memberSelect = document.createElement("select");
     members.forEach(member => {
-        if (member.id) { // ✅ Kontrollera att medlemmen har ett ID
+        if (member.id) {
             const option = document.createElement("option");
             option.value = member.id;
             option.textContent = member.name;
@@ -178,33 +167,30 @@ async function assignTask(taskId) {
     assignButton.textContent = "Confirm Assignment";
     assignButton.addEventListener("click", async () => {
         const selectedMemberId = memberSelect.value;
-        if (selectedMemberId) { // ✅ Kontrollera att vi har ett giltigt ID
+        if (selectedMemberId) {
             const selectedMember = members.find(member => member.id === selectedMemberId);
             if (!selectedMember) {
                 console.error("Selected member not found.");
                 return;
             }
-            // Kontrollera om medlemmen har rätt roll för uppgiften
             if (!selectedMember.roles.includes(task.category)) {
                 alert(`Member ${selectedMember.name} cannot be assigned to this task. This task requires a ${task.category} role.`);
-                return; // Förhindrar att uppgiften går till "in-progress"
+                return;
             }
             await assignTaskToMember(taskId, selectedMemberId);
-            // Uppdatera uppgiften till 'in-progress'
-            await updateTaskStatus(taskId, "in-progress"); // Uppdatera statusen till "in-progress"
-            displayTasks(); // Uppdatera Scrum Board
+            await updateTaskStatus(taskId, "in-progress");
+            displayTasks();
         }
         else {
             console.error("Member ID is missing. Cannot assign task.");
         }
     });
-    // Visa dropdown och knapp för att bekräfta val
     const assignDiv = document.getElementById("assign-container");
-    if (assignDiv && assignDiv.children.length === 0) { // 🆕 Kontrollera att det inte redan finns en dropdown
+    if (assignDiv && assignDiv.children.length === 0) {
         assignDiv.appendChild(memberSelect);
         assignDiv.appendChild(assignButton);
     }
 }
 export async function refreshTasks() {
-    await displayTasks(); // Laddar om uppgiftslistan
+    await displayTasks();
 }

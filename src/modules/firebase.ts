@@ -1,8 +1,8 @@
 const databaseURL = "https://test-project-e2cba-default-rtdb.europe-west1.firebasedatabase.app/";
 
-// Gränssnitt för uppgifter och medlemmar
+
 export interface Task {
-  id?: string; // Lägg till id som valfritt (Firebase skapar ID automatiskt)
+  id?: string; 
   title: string;
   description: string;
   category: "frontend" | "backend" | "ux";
@@ -12,7 +12,7 @@ export interface Task {
 }
 
 export interface Member {
-  id?: string; // Lägg till detta så att varje medlem har ett valfritt id
+  id?: string; // 
   name: string;
   roles: string[];
 }
