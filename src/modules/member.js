@@ -24,7 +24,6 @@ export async function getMembers() {
                 roles: Array.isArray(member.roles) ? member.roles : [member.roles],
             };
         });
-        console.log("Mapped members:", members);
         return members;
     }
     catch (error) {

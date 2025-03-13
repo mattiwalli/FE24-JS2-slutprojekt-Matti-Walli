@@ -27,7 +27,7 @@ export async function getMembers(): Promise<Member[]> {
         roles: Array.isArray(member.roles) ? member.roles : [member.roles],
       };
     });
-    console.log("Mapped members:", members);
+    
     return members;
   } catch (error) {
     console.error("Error fetching members:", error);
