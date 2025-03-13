@@ -1,7 +1,7 @@
 var _a;
 import { loadTasks, updateTaskStatus, deleteTask, assignTaskToMember, addTask } from "./tasks.js";
 import { loadMembers, addMember, showMembers } from "./member.js";
-import { filterSortTasks } from "./filter.js";
+import { filterSortTasks, showMemberfilter } from "./filter.js";
 //---------------------------------------//
 document.addEventListener("DOMContentLoaded", async () => {
     showTasks();
@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
             await addMember({ name, roles: selectedRoles });
             showMembers();
+            showMemberfilter();
             nameInput.value = "";
             roleSelect.selectedIndex = -1;
         });

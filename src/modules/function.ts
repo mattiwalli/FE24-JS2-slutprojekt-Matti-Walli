@@ -1,7 +1,7 @@
 import { loadTasks, updateTaskStatus, deleteTask, assignTaskToMember, addTask } from "./tasks";
 import { loadMembers, addMember, showMembers } from "./member";
 import { Task } from "./firebase";
-import { filterSortTasks } from "./filter";
+import { filterSortTasks, showMemberfilter } from "./filter";
 
 //---------------------------------------//
 document.addEventListener("DOMContentLoaded", async () => {
@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       await addMember({ name, roles: selectedRoles });
 
       showMembers();
+      showMemberfilter()
       
       nameInput.value = "";
       roleSelect.selectedIndex = -1;
