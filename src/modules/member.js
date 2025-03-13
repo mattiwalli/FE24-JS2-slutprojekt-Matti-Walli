@@ -1,10 +1,10 @@
 import { databaseURL } from './firebase.js';
-import { displayTasks } from './function.js';
-import { displayMemberDropdown } from './filter.js';
+import { showTasks } from './function.js';
+import { showMemberfilter } from './filter.js';
 document.addEventListener("DOMContentLoaded", async () => {
-    displayMembers();
-    displayTasks();
-    displayMemberDropdown();
+    showMembers();
+    showTasks();
+    showMemberfilter();
 });
 //-----------------------------------------------------------------//
 export async function getMembers() {
@@ -33,7 +33,7 @@ export async function getMembers() {
     }
 }
 //-----------------------------------------------------------------------//
-export async function displayMembers() {
+export async function showMembers() {
     const memberList = document.getElementById("member-list");
     if (!memberList)
         return;

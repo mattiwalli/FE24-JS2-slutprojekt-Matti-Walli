@@ -1,11 +1,11 @@
 import { Member, databaseURL } from './firebase';
-import { displayTasks } from './function';
-import { displayMemberDropdown } from './filter';
+import { showTasks } from './function';
+import { showMemberfilter } from './filter';
 
 document.addEventListener("DOMContentLoaded", async () => {
-  displayMembers();  
-  displayTasks();   
-  displayMemberDropdown()
+  showMembers();  
+  showTasks();   
+  showMemberfilter()
 });
 
 //-----------------------------------------------------------------//
@@ -38,7 +38,7 @@ export async function getMembers(): Promise<Member[]> {
 
 
 //-----------------------------------------------------------------------//
-export async function displayMembers() {
+export async function showMembers() {
   const memberList = document.getElementById("member-list");
   if (!memberList) return;
 

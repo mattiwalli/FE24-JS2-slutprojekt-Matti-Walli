@@ -1,10 +1,10 @@
 var _a;
 import { loadTasks, updateTaskStatus, deleteTask, assignTaskToMember, addTask } from "./tasks.js";
-import { loadMembers, addMember, displayMembers } from "./member.js";
-import { filterAndSortTasks } from "./filter.js";
+import { loadMembers, addMember, showMembers } from "./member.js";
+import { filterSortTasks } from "./filter.js";
 //---------------------------------------//
 document.addEventListener("DOMContentLoaded", async () => {
-    displayTasks();
+    showTasks();
     const addMemberButton = document.getElementById("add-member-btn");
     if (addMemberButton) {
         addMemberButton.addEventListener("click", async () => {
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 return;
             }
             await addMember({ name, roles: selectedRoles });
-            displayMembers();
+            showMembers();
             nameInput.value = "";
             roleSelect.selectedIndex = -1;
         });
@@ -47,13 +47,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         assigned: null,
     };
     await addTask(newTask);
-    displayTasks();
+    showTasks();
     titleInput.value = "";
     descriptionInput.value = "";
     categorySelect.selectedIndex = 0;
 });
 //----------------------------------------//
-export async function displayTasks(filteredTasksFromDb) {
+export async function showTasks(filteredTasksFromDb) {
     var _a;
     const tasks = filteredTasksFromDb || await loadTasks();
     const filterMemberSelect = document.getElementById("filter-member");
@@ -62,7 +62,7 @@ export async function displayTasks(filteredTasksFromDb) {
     const filterMember = filterMemberSelect ? filterMemberSelect.value : "";
     const filterCategory = filterCategorySelect ? filterCategorySelect.value : "";
     const sortOption = sortOptionSelect ? sortOptionSelect.value : "timestamp-desc";
-    const tasksToDisplay = await filterAndSortTasks(tasks, filterMember, filterCategory, sortOption);
+    const tasksToDisplay = await filterSortTasks(tasks, filterMember, filterCategory, sortOption);
     if (tasksToDisplay.length === 0) {
         const message = document.createElement("p");
         message.textContent = "No tasks available for the selected filters.";
@@ -115,7 +115,7 @@ export async function displayTasks(filteredTasksFromDb) {
                 doneButton.addEventListener("click", async () => {
                     if (task.id) {
                         await updateTaskStatus(task.id, "done");
-                        await displayTasks();
+                        await showTasks();
                     }
                     else {
                         console.error("Task ID is missing. Cannot update task.");
@@ -179,7 +179,7 @@ async function assignTask(taskId) {
             }
             await assignTaskToMember(taskId, selectedMemberId);
             await updateTaskStatus(taskId, "in-progress");
-            displayTasks();
+            showTasks();
         }
         else {
             console.error("Member ID is missing. Cannot assign task.");
@@ -192,5 +192,5 @@ async function assignTask(taskId) {
     }
 }
 export async function refreshTasks() {
-    await displayTasks();
+    await showTasks();
 }

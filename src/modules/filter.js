@@ -1,9 +1,9 @@
 var _a;
-import { displayTasks } from "./function.js";
+import { showTasks } from "./function.js";
 import { loadTasks } from "./tasks.js";
 import { getMembers } from "./member.js";
 ///------------------------------------------------------------------------------------///
-export async function filterAndSortTasks(tasks, filterMember, filterCategory, sortOption) {
+export async function filterSortTasks(tasks, filterMember, filterCategory, sortOption) {
     let filteredTasks = tasks;
     if (filterMember) {
         filteredTasks = filteredTasks.filter(task => task.assigned && task.assigned === filterMember);
@@ -34,11 +34,11 @@ export async function filterAndSortTasks(tasks, filterMember, filterCategory, so
     const sortOptionSelect = document.getElementById("sort-option");
     const selectedSortOption = sortOptionSelect.value;
     const tasks = await loadTasks();
-    await filterAndSortTasks(tasks, selectedMember, selectedCategory, selectedSortOption);
-    displayTasks();
+    await filterSortTasks(tasks, selectedMember, selectedCategory, selectedSortOption);
+    showTasks();
 });
 ///------------------------------------------------------------------------------------///
-export async function displayMemberDropdown() {
+export async function showMemberfilter() {
     const memberSelect = document.getElementById("filter-member");
     if (!memberSelect)
         return;

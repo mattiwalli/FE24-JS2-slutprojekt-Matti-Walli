@@ -15,7 +15,6 @@ export async function addTask(task) {
     }
     const responseData = await response.json();
     const taskId = responseData.name;
-    // Uppdatera uppgiften med sitt ID
     await fetch(`${databaseURL}/tasks/${taskId}.json`, {
         method: "PATCH",
         headers: {

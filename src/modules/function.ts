@@ -1,11 +1,11 @@
 import { loadTasks, updateTaskStatus, deleteTask, assignTaskToMember, addTask } from "./tasks";
-import { loadMembers, addMember, displayMembers } from "./member";
+import { loadMembers, addMember, showMembers } from "./member";
 import { Task } from "./firebase";
-import { filterAndSortTasks } from "./filter";
+import { filterSortTasks } from "./filter";
 
 //---------------------------------------//
 document.addEventListener("DOMContentLoaded", async () => {
-  displayTasks();    
+  showTasks();    
 
   const addMemberButton = document.getElementById("add-member-btn");
   if (addMemberButton) {
@@ -22,13 +22,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         alert("Please enter a name and select at least one role.");
         return;
       }
-
-    
       await addMember({ name, roles: selectedRoles });
 
-      
-      displayMembers();
-
+      showMembers();
       
       nameInput.value = "";
       roleSelect.selectedIndex = -1;
@@ -62,14 +58,14 @@ document.getElementById("addTaskBtn")?.addEventListener("click", async () => {
     assigned: null,
   };
   await addTask(newTask);
-  displayTasks();
+  showTasks();
   titleInput.value = "";
   descriptionInput.value = "";
   categorySelect.selectedIndex = 0;
 });
 
 //----------------------------------------//
-export async function displayTasks(filteredTasksFromDb?: Task[]) {
+export async function showTasks(filteredTasksFromDb?: Task[]) {
   const tasks = filteredTasksFromDb || await loadTasks();
 
   const filterMemberSelect = document.getElementById("filter-member") as HTMLSelectElement;
@@ -81,7 +77,7 @@ export async function displayTasks(filteredTasksFromDb?: Task[]) {
   const sortOption = sortOptionSelect ? sortOptionSelect.value : "timestamp-desc";
 
  
-  const tasksToDisplay = await filterAndSortTasks(tasks, filterMember, filterCategory, sortOption);
+  const tasksToDisplay = await filterSortTasks(tasks, filterMember, filterCategory, sortOption);
 
   
   if (tasksToDisplay.length === 0) {
@@ -143,7 +139,7 @@ export async function displayTasks(filteredTasksFromDb?: Task[]) {
         doneButton.addEventListener("click", async () => {
           if (task.id) {
             await updateTaskStatus(task.id, "done");
-            await displayTasks(); 
+            await showTasks(); 
           } else {
             console.error("Task ID is missing. Cannot update task.");
           }
@@ -209,7 +205,7 @@ async function assignTask(taskId: string) {
       }
       await assignTaskToMember(taskId, selectedMemberId);
       await updateTaskStatus(taskId, "in-progress"); 
-      displayTasks(); 
+      showTasks(); 
     } else {
       console.error("Member ID is missing. Cannot assign task.");
     }
@@ -225,7 +221,7 @@ async function assignTask(taskId: string) {
 
 
 export async function refreshTasks() {
-  await displayTasks(); 
+  await showTasks(); 
 }
 
 

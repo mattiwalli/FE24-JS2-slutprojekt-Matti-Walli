@@ -1,4 +1,4 @@
-import { displayTasks } from "./function";
+import { showTasks } from "./function";
 import { Task } from './firebase';
 import { loadTasks } from "./tasks";
 import { getMembers } from "./member";
@@ -6,7 +6,7 @@ import { getMembers } from "./member";
 
 
 ///------------------------------------------------------------------------------------///
-export async function filterAndSortTasks(
+export async function filterSortTasks(
   tasks: Task[], 
   filterMember: string, 
   filterCategory: string, 
@@ -57,8 +57,8 @@ document.getElementById("apply-filters")?.addEventListener("click", async () => 
   
     const tasks = await loadTasks(); 
   
-    await filterAndSortTasks(tasks, selectedMember, selectedCategory, selectedSortOption);
-    displayTasks();
+    await filterSortTasks(tasks, selectedMember, selectedCategory, selectedSortOption);
+    showTasks();
   });
 
 
@@ -66,7 +66,7 @@ document.getElementById("apply-filters")?.addEventListener("click", async () => 
 
 
 ///------------------------------------------------------------------------------------///
-  export async function displayMemberDropdown() {
+  export async function showMemberfilter() {
     const memberSelect = document.getElementById("filter-member") as HTMLSelectElement;
     if (!memberSelect) return;
   
