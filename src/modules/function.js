@@ -144,6 +144,10 @@ export async function showTasks(filteredTasksFromDb) {
 }
 //----------------------------------------//
 async function assignTask(taskId) {
+    const assignDiv = document.getElementById("assign-container");
+    if (assignDiv) {
+        assignDiv.innerHTML = "";
+    }
     const members = await loadMembers();
     if (members.length === 0) {
         alert("No members available to assign.");
@@ -174,20 +178,24 @@ async function assignTask(taskId) {
                 console.error("Selected member not found.");
                 return;
             }
-            if (!selectedMember.roles.includes(task.category)) {
+            const memberRolesLower = selectedMember.roles.map(role => role.toLowerCase());
+            const taskCategoryLower = task.category.toLowerCase();
+            if (!memberRolesLower.includes(taskCategoryLower)) {
                 alert(`Member ${selectedMember.name} cannot be assigned to this task. This task requires a ${task.category} role.`);
                 return;
             }
             await assignTaskToMember(taskId, selectedMemberId);
             await updateTaskStatus(taskId, "in-progress");
             showTasks();
+            if (assignDiv) {
+                assignDiv.innerHTML = "";
+            }
         }
         else {
             console.error("Member ID is missing. Cannot assign task.");
         }
     });
-    const assignDiv = document.getElementById("assign-container");
-    if (assignDiv && assignDiv.children.length === 0) {
+    if (assignDiv) {
         assignDiv.appendChild(memberSelect);
         assignDiv.appendChild(assignButton);
     }

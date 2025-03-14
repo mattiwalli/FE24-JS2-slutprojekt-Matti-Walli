@@ -167,6 +167,12 @@ export async function showTasks(filteredTasksFromDb?: Task[]) {
 
 //----------------------------------------//
 async function assignTask(taskId: string) {
+  
+  const assignDiv = document.getElementById("assign-container");
+  if (assignDiv) {
+    assignDiv.innerHTML = "";
+  }
+
   const members = await loadMembers();
   if (members.length === 0) {
     alert("No members available to assign.");
@@ -181,7 +187,7 @@ async function assignTask(taskId: string) {
 
   const memberSelect = document.createElement("select");
   members.forEach(member => {
-    if (member.id) { 
+    if (member.id) {
       const option = document.createElement("option");
       option.value = member.id;
       option.textContent = member.name;
@@ -193,32 +199,38 @@ async function assignTask(taskId: string) {
   assignButton.textContent = "Confirm Assignment";
   assignButton.addEventListener("click", async () => {
     const selectedMemberId = memberSelect.value;
-    if (selectedMemberId) {  
+    if (selectedMemberId) {
       const selectedMember = members.find(member => member.id === selectedMemberId);
-      
       if (!selectedMember) {
         console.error("Selected member not found.");
         return;
       }
-      if (!selectedMember.roles.includes(task.category)) {
+      
+      const memberRolesLower = selectedMember.roles.map(role => role.toLowerCase());
+      const taskCategoryLower = task.category.toLowerCase();
+      if (!memberRolesLower.includes(taskCategoryLower)) {
         alert(`Member ${selectedMember.name} cannot be assigned to this task. This task requires a ${task.category} role.`);
-        return; 
+        return;
       }
       await assignTaskToMember(taskId, selectedMemberId);
-      await updateTaskStatus(taskId, "in-progress"); 
-      showTasks(); 
+      await updateTaskStatus(taskId, "in-progress");
+      showTasks();
+      
+      if (assignDiv) {
+        assignDiv.innerHTML = "";
+      }
     } else {
       console.error("Member ID is missing. Cannot assign task.");
     }
   });
 
   
-  const assignDiv = document.getElementById("assign-container");
-  if (assignDiv && assignDiv.children.length === 0) { 
+  if (assignDiv) {
     assignDiv.appendChild(memberSelect);
     assignDiv.appendChild(assignButton);
   }
 }
+
 
 
 export async function refreshTasks() {
