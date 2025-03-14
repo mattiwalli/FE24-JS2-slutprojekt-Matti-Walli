@@ -207,8 +207,8 @@ async function assignTask(taskId: string) {
       }
       
       const memberRolesLower = selectedMember.roles.map(role => role.toLowerCase());
-      const taskCategoryLower = task.category.toLowerCase();
-      if (!memberRolesLower.includes(taskCategoryLower)) {
+      const taskCategory = task.category.toLowerCase();
+      if (!memberRolesLower.includes(taskCategory)) {
         alert(`Member ${selectedMember.name} cannot be assigned to this task. This task requires a ${task.category} role.`);
         return;
       }
