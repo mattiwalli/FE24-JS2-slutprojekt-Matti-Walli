@@ -23,7 +23,7 @@ export async function getMembers(): Promise<Member[]> {
       const member = data[key];
       return {
         id: key,
-        name: member.name ?? "No name",
+        name: member.name,
         roles: Array.isArray(member.roles) ? member.roles : [member.roles],
       };
     });
