@@ -16,11 +16,10 @@ export async function getMembers() {
         if (!data)
             return [];
         const members = Object.keys(data).map((key) => {
-            var _a;
             const member = data[key];
             return {
                 id: key,
-                name: (_a = member.name) !== null && _a !== void 0 ? _a : "No name",
+                name: member.name,
                 roles: Array.isArray(member.roles) ? member.roles : [member.roles],
             };
         });
